@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+ # RewriteEngine On
+ # RewriteCond %{HTTPS} off
+ # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+ ServerAdmin dave@upgradeya.com
+ ServerName daveparrish.net.local
+
+ DocumentRoot /vagrant/hakyll/_site
+ ErrorLog /vagrant/log/error.log
+ CustomLog /vagrant/log/access.log combined
+</VirtualHost>

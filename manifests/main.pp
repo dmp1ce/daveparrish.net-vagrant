@@ -32,7 +32,46 @@ class haskell {
   }
 }
 
+# Basic Puppet Apache manifest
+class apache {
+  package { "apache2":
+    ensure => latest,
+  }
+
+  service { "apache2":
+    ensure => running,
+    require => [ Package["apache2"], File['/vagrant/log'] ],
+  }
+
+  file { "/etc/apache2/sites-available/drupal_archive":
+    owner   => "root",
+    group   => "root",
+    mode    => 644,
+    replace => true,
+    ensure  => present,
+    source  => "/vagrant/files/drupal_archive",
+    require => Package["apache2"],
+  }
+
+  # Turn on Drupal site
+  file { "/etc/apache2/sites-enabled/drupal_archive":
+    ensure => link,
+    target => "/etc/apache2/sites-available/drupal_archive",
+    require => [ Package['apache2'], File['/etc/apache2/sites-available/drupal_archive'] ],
+    notify  => Service["apache2"]
+  }
+
+  # Make sure the log directory exists
+  file { "/vagrant/log":
+    ensure => "directory",
+    owner => "vagrant",
+    group => "vagrant",
+    mode   => 644,
+  }
+}
+
 # TODO: Install Hakyll.
 # Right now this is a manual step: cabal install hakyll
 
 include haskell
+include apache
