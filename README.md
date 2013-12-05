@@ -18,7 +18,7 @@ BUILD
 PREVIEW
 -------
 
-- `./site preview`
+- `./site watch`
 - Browse to 10.1.1.201:8000 on your web browser from your host computer.
 
 TODO
