@@ -19,7 +19,7 @@ PREVIEW
 -------
 
 - `./site preview`
-- Browse to 10.1.1.200:8000 on your web browser from your host computer.
+- Browse to 10.1.1.201:8000 on your web browser from your host computer.
 
 TODO
 ----
